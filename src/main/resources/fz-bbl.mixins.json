@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.fcidd.bedrock.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerPlacedMixin",
+    "PistonBreakBedrockMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
