@@ -1,16 +1,15 @@
-package xyz.fcidd.bedrock.callback;
+package xyz.fcidd.fzbbl.callback;
 
 import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.EventFactory;
-import net.minecraft.scoreboard.ScoreboardCriterion;
-import net.minecraft.text.Text;
+import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.util.ActionResult;
 
 public interface ScoreboardRemovedCallback {
     Event<ScoreboardRemovedCallback> EVENT = EventFactory.createArrayBacked(ScoreboardRemovedCallback.class,
-            (listeners) -> (name, criterion, displayName, renderType) -> {
+            (listeners) -> (objective) -> {
                 for (ScoreboardRemovedCallback listener : listeners) {
-                    ActionResult result = listener.interact(name, criterion, displayName, renderType);
+                    ActionResult result = listener.interact(objective);
                     if (result != ActionResult.PASS) {
                         return result;
                     }
@@ -18,6 +17,5 @@ public interface ScoreboardRemovedCallback {
                 return ActionResult.PASS;
             });
 
-    ActionResult interact(String name, ScoreboardCriterion criterion, Text displayName,
-            ScoreboardCriterion.RenderType renderType);
+    ActionResult interact(ScoreboardObjective objective);
 }

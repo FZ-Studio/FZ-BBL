@@ -1,4 +1,4 @@
-package xyz.fcidd.bedrock;
+package xyz.fcidd.fzbbl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,37 +11,39 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardCriterion;
+import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.world.World;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
-import xyz.fcidd.bedrock.callback.PistonBreakBedrockCallback;
-import xyz.fcidd.bedrock.callback.PlayerPlacedCallback;
-import xyz.fcidd.bedrock.callback.ScoreboardAddedCallback;
-import xyz.fcidd.bedrock.callback.ScoreboardRemovedCallback;
+import xyz.fcidd.fzbbl.callback.PistonBreakBedrockCallback;
+import xyz.fcidd.fzbbl.callback.PlayerPlacedCallback;
+import xyz.fcidd.fzbbl.callback.ScoreboardAddedCallback;
+import xyz.fcidd.fzbbl.callback.ScoreboardRemovedCallback;
 
-public class BedrockBreakList implements ModInitializer {
+public class FZBBL implements ModInitializer {
 	public static HashMap<World, HashMap<BlockPos, PlayerEntity>> pistonCaches;
 	private static HashMap<BlockPos, PlayerEntity> pistonPosCaches;
-	private static ArrayList<String> scoreboardBBL = new ArrayList<>();
+	private static ArrayList<ScoreboardObjective> scoreboardBBL = new ArrayList<>();
 
 	@Override
 	public void onInitialize() {
-		ScoreboardAddedCallback.EVENT.register((name, criterion, displayName, renderType) -> {
+		ScoreboardAddedCallback.EVENT.register((name, criterion, displayName, renderType, objective) -> {
 			try {
 				if (name.substring(name.length() - 4).equals(".bbl") && criterion.equals(ScoreboardCriterion.DUMMY)) {
-					System.out.println("AddedBedrockBreakedList" + name);
-					scoreboardBBL.add(name);
+					System.out.println("AddedBedrockBreakedList: " + name);
+					scoreboardBBL.add(objective);
 				}
 			} catch (StringIndexOutOfBoundsException e) {
 
 			}
 			return ActionResult.PASS;
 		});
-		ScoreboardRemovedCallback.EVENT.register((name, criterion, displayName, renderType) -> {
+		ScoreboardRemovedCallback.EVENT.register((objective) -> {
+			String name = objective.getName();
 			try {
-				if (name.substring(name.length() - 4).equals(".bbl") && criterion.equals(ScoreboardCriterion.DUMMY)) {
-					System.out.println("RemovedBedrockBreakedList" + name);
-					scoreboardBBL.remove(name);
+				if (name.substring(name.length() - 4).equals(".bbl") && objective.getCriterion().equals(ScoreboardCriterion.DUMMY)) {
+					System.out.println("RemovedBedrockBreakedList: " + name);
+					scoreboardBBL.remove(objective);
 				}
 			} catch (StringIndexOutOfBoundsException e) {
 
@@ -71,8 +73,7 @@ public class BedrockBreakList implements ModInitializer {
 			scoreboardBBL.forEach(objective -> {
 				Scoreboard scoreboard = world.getScoreboard();
 				try {
-					scoreboard.getPlayerScore(player, scoreboard.getObjective(objective)).incrementScore();
-					;
+					scoreboard.getPlayerScore(player, objective).incrementScore();
 				} catch (NullPointerException e) {
 
 				}

@@ -1,30 +1,30 @@
 {
   "schemaVersion": 1,
-  "id": "fz-bbl",
+  "id": "fzbbl",
   "version": "${version}",
 
   "name": "FZ's Bedrock Breaked List",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "这个人很懒，什么都没写…",
   "authors": [
     "Harvey_Husky",
     "Maple_Dust"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://gitee.com/harvey-husky/FZ-BBL/releases",
+    "sources": "https://gitee.com/harvey-husky/FZ-BBL"
   },
 
   "license": "awa",
-  "icon": "assets/fz-bbl/icon.png",
+  "icon": "assets/fzbbl/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "xyz.fcidd.bedrock.BedrockBreakList"
+      "xyz.fcidd.fzbbl.FZBBL"
     ]
   },
   "mixins": [
-    "fz-bbl.mixins.json"
+    "fzbbl.mixins.json"
   ],
 
   "depends": {
