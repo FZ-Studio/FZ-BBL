@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.fcidd.fzbbl.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "PlayerPlacedMixin",
+    "PistonBreakBedrockMixin",
+    "ScoreboardAddedMixin",
+    "ScoreboardRemovedMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

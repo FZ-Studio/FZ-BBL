@@ -11,7 +11,7 @@ import xyz.fcidd.fzbbl.callback.ScoreboardRemovedCallback;
 
 @Mixin(Scoreboard.class)
 public class ScoreboardRemovedMixin {
-    @Inject(at = @At(value = "RETURN"), method = "removeObjective")
+    @Inject(at = @At(value = "HEAD"), method = "removeObjective")
     public void onScoreboardRemoved(final ScoreboardObjective objective, CallbackInfo cir) {
         ScoreboardRemovedCallback.EVENT.invoker().interact(objective);
     }

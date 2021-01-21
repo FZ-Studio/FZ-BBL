@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "fzbbl",
+  "version": "${version}",
+
+  "name": "FZ's Bedrock Breaked List",
+  "description": "这个人很懒 什么都没写",
+  "authors": [
+    "Harvey_Husky",
+    "Maple_Dust"
+  ],
+  "contact": {
+    "homepage": "https://gitee.com/harvey-husky/FZ-BBL/releases",
+    "sources": "https://gitee.com/harvey-husky/FZ-BBL"
+  },
+
+  "license": "awa",
+  "icon": "assets/fzbbl/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "xyz.fcidd.fzbbl.FZBBL"
+    ]
+  },
+  "mixins": [
+    "fzbbl.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
